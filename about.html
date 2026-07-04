@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>このサイトについて｜紙上の旅人</title>
+<meta name="description" content="紙上の旅人の運営者情報、関連サイト、お問い合わせフォームのページです。">
+<meta name="robots" content="noai, noimageai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@500;600&display=swap" rel="stylesheet">
+<style>
+@charset "UTF-8";
+
+/* ==========================================================================
+   紙上の旅人｜小説ファンサイト — このサイトについて
+   ========================================================================== */
+
+:root{
+  --paper:      #F8F5E9;
+  --paper-alt:  #F0EAD4;
+  --ink:        #32362A;
+  --ink-soft:   #5E6350;
+  --green-main: #A7C24C;
+  --green-deep: #57742E;
+  --green-line: #7FA33C;
+  --road-tan:   #D9C9A0;
+  --sky:        #93B7C4;
+  --mustard:    #E2AE3B;
+  --shadow:     rgba(50, 54, 42, 0.12);
+
+  --font-display: "Shippori Mincho B1", serif;
+  --font-body:    "Zen Kaku Gothic New", sans-serif;
+  --font-hand:    "Klee One", cursive;
+
+  --max-width: 1080px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+img{ max-width: 100%; display: block; }
+a{ color: var(--green-deep); text-decoration: none; }
+a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+h1, h2, h3, h4{
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 700;
+  margin: 0 0 0.6em;
+  line-height: 1.5;
+}
+
+.eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-hand);
+  font-size: 0.85rem;
+  color: var(--green-deep);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.8em;
+}
+
+.wrap{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+:focus-visible{
+  outline: 2px solid var(--green-deep);
+  outline-offset: 3px;
+}
+
+/* --- ヘッダー / ナビゲーション ------------------------------------------ */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248, 245, 233, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(87, 116, 46, 0.18);
+}
+.site-header .wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.brand .brand-mark{ width: 30px; height: 30px; flex-shrink: 0; }
+.brand .brand-sub{
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+}
+.nav-list{
+  display: flex;
+  gap: 2.2em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+}
+.nav-list a{ color: var(--ink); position: relative; padding: 4px 2px; }
+.nav-list a::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 2px;
+  background: var(--green-main);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-list a:hover{ text-decoration: none; }
+.nav-list a:hover::after,
+.nav-list a[aria-current="page"]::after{ transform: scaleX(1); }
+.nav-list a[aria-current="page"]{ color: var(--green-deep); font-weight: 700; }
+
+.hamburger{
+  display: none;
+  width: 40px; height: 40px;
+  border: none; background: transparent;
+  cursor: pointer; position: relative;
+}
+.hamburger span, .hamburger span::before, .hamburger span::after{
+  content: ""; position: absolute; left: 9px;
+  width: 22px; height: 2px; background: var(--ink);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.hamburger span{ top: 19px; }
+.hamburger span::before{ top: -7px; }
+.hamburger span::after{ top: 7px; }
+.hamburger.is-open span{ background: transparent; }
+.hamburger.is-open span::before{ transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open span::after{ transform: translateY(-7px) rotate(-45deg); }
+
+/* --- 風のライン ---------------------------------------------------------- */
+.wind-divider{ width: 100%; height: 46px; display: block; margin: 0; }
+.wind-divider path{
+  fill: none; stroke: var(--green-line); stroke-width: 1.4;
+  stroke-dasharray: 2 10; stroke-linecap: round; opacity: 0.6;
+}
+
+/* --- ページヒーロー ------------------------------------------------------- */
+.page-hero{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #EAF1DD 0%, #DCE9C4 55%, var(--green-main) 100%);
+  padding: 96px 24px 64px;
+  text-align: center;
+}
+.page-hero .hero-sky{
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 8%, rgba(255,255,255,0.55), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 15% 15%, rgba(147,183,196,0.35), transparent 70%);
+  pointer-events: none;
+}
+.page-hero-content{ position: relative; z-index: 2; }
+.page-hero .eyebrow{ justify-content: center; }
+.page-hero h1{ font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 0.04em; }
+.page-hero p{ max-width: 34em; margin: 0 auto; color: var(--ink-soft); font-size: 1rem; }
+
+/* --- セクション共通 ------------------------------------------------------- */
+section{ padding: 72px 0; }
+.section-alt{ background: var(--paper-alt); }
+
+.section-label{
+  font-family: var(--font-hand);
+  font-size: 0.8rem;
+  color: var(--green-deep);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(87,116,46,0.35), transparent);
+}
+
+.lede{ max-width: 46em; font-size: 1.02rem; color: var(--ink-soft); }
+
+/* --- 自己紹介 -------------------------------------------------------------- */
+.profile-panel{
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+.profile-badge{
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #C7DB8F, var(--green-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  box-shadow: inset 0 0 0 6px rgba(255,255,255,0.25);
+}
+
+/* --- リンクグリッド --------------------------------------------------------- */
+.link-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.link-card{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--paper);
+  border: 1px solid rgba(87,116,46,0.18);
+  border-radius: 10px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.link-card::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--green-main), transparent);
+}
+.link-card:hover{
+  border-color: rgba(87,116,46,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px var(--shadow);
+  text-decoration: none;
+}
+.link-icon{
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(167,194,76,0.16);
+  border: 1px solid rgba(87,116,46,0.2);
+  border-radius: 8px;
+}
+.link-text{ flex: 1; min-width: 0; }
+.link-name{ display: block; font-size: 0.95rem; font-weight: 700; color: var(--green-deep); margin-bottom: 2px; }
+.link-desc{ display: block; font-size: 0.78rem; color: var(--ink-soft); line-height: 1.5; }
+.link-arrow{ font-size: 18px; color: rgba(87,116,46,0.35); flex-shrink: 0; transition: color 0.2s ease, transform 0.2s ease; }
+.link-card:hover .link-arrow{ color: var(--green-deep); transform: translateX(3px); }
+
+/* --- お問い合わせフォーム ---------------------------------------------------- */
+.form-card{
+  background: var(--paper);
+  border: 1px solid rgba(87,116,46,0.2);
+  border-radius: 12px;
+  padding: 32px 34px;
+  position: relative;
+  overflow: hidden;
+  max-width: 640px;
+}
+.form-card::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--green-main), transparent);
+}
+.form-intro{ font-size: 0.92rem; color: var(--ink-soft); line-height: 1.9; margin-bottom: 24px; }
+.form-group{ margin-bottom: 18px; }
+.form-label{
+  display: block;
+  font-size: 0.8rem;
+  color: var(--green-deep);
+  letter-spacing: 0.06em;
+  margin-bottom: 7px;
+  font-family: var(--font-hand);
+}
+.required{ color: #B5595F; font-style: normal; }
+.form-input, .form-textarea{
+  width: 100%;
+  background: #FBF9F1;
+  border: 1px solid rgba(87,116,46,0.28);
+  border-radius: 6px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  padding: 10px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.form-input::placeholder, .form-textarea::placeholder{ color: #A9AD97; }
+.form-input:focus, .form-textarea:focus{
+  border-color: var(--green-deep);
+  box-shadow: 0 0 0 3px rgba(167,194,76,0.22);
+}
+.form-textarea{ resize: vertical; min-height: 140px; }
+.field-error{ display: block; font-size: 0.76rem; color: #B5595F; margin-top: 5px; }
+.form-submit{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-deep);
+  border: 1px solid var(--green-deep);
+  border-radius: 999px;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  padding: 11px 30px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 6px;
+}
+.form-submit:hover{ background: #486025; box-shadow: 0 8px 20px var(--shadow); }
+.form-submit:disabled{ opacity: 0.5; cursor: not-allowed; }
+.form-success{
+  background: rgba(167,194,76,0.16);
+  border: 1px solid rgba(87,116,46,0.35);
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: center;
+  color: var(--green-deep);
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+}
+.form-success-icon{ display: block; font-size: 1.2rem; margin-bottom: 8px; }
+.form-error-global{
+  background: rgba(181,89,95,0.1);
+  border: 1px solid rgba(181,89,95,0.35);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #B5595F;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+/* --- 戻るリンク ------------------------------------------------------------ */
+.back-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 40px;
+  color: var(--green-deep);
+  border: 1px solid rgba(87,116,46,0.35);
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  transition: background 0.15s ease;
+}
+.back-link:hover{ background: rgba(167,194,76,0.16); text-decoration: none; }
+
+/* --- フッター -------------------------------------------------------------- */
+.site-footer{ background: var(--ink); color: #DCE3CE; padding: 56px 0 30px; }
+.site-footer .wrap{ display: flex; flex-direction: column; gap: 24px; }
+.footer-top{ display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-brand{ font-family: var(--font-display); font-size: 1.1rem; color: var(--paper); }
+.footer-nav{ display: flex; gap: 1.6em; list-style: none; padding: 0; margin: 0; flex-wrap: wrap; font-size: 0.88rem; }
+.footer-nav a{ color: #C7D2AE; }
+.footer-nav a:hover{ color: var(--green-main); }
+.disclaimer{
+  font-size: 0.78rem; color: #9AA687; line-height: 1.8;
+  border-top: 1px solid rgba(255,255,255,0.12); padding-top: 20px;
+}
+
+/* --- レスポンシブ ------------------------------------------------------------ */
+@media (max-width: 720px){
+  .nav-list{
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--paper);
+    flex-direction: column; gap: 0;
+    border-bottom: 1px solid rgba(87,116,46,0.18);
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-list.is-open{ max-height: 320px; }
+  .nav-list li{ width: 100%; }
+  .nav-list a{ display: block; padding: 16px 24px; border-top: 1px solid rgba(87,116,46,0.08); }
+  .nav-list a::after{ display: none; }
+  .hamburger{ display: block; }
+  section{ padding: 52px 0; }
+  .page-hero{ padding: 76px 20px 48px; }
+  .profile-panel{ grid-template-columns: 1fr; text-align: center; }
+  .profile-badge{ width: 120px; margin: 0 auto; }
+  .link-grid{ grid-template-columns: 1fr; }
+  .form-card{ padding: 26px 22px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="#57742E" stroke-width="1.4"/>
+        <path d="M6 22 C 14 14, 18 28, 26 18 S 34 12, 36 16" fill="none" stroke="#A7C24C" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span>紙上の旅人<span class="brand-sub">— 小説ファンサイト —</span></span>
+    </a>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span>
+    </button>
+    <ul class="nav-list">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="blog.html">ブログ</a></li>
+      <li><a href="ranking.html">お気に入りランキング</a></li>
+      <li><a href="gallery.html">ギャラリー</a></li>
+      <li><a href="about.html" aria-current="page">このサイトについて</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== PAGE HERO ===================== -->
+  <section class="page-hero">
+    <div class="hero-sky"></div>
+    <div class="page-hero-content wrap">
+      <p class="eyebrow">ABOUT</p>
+      <h1>このサイトについて</h1>
+      <p>運営者の自己紹介、関連サイト、お問い合わせフォームをまとめています。</p>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 5 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== 運営者について ===================== -->
+  <section>
+    <div class="wrap">
+      <p class="section-label">運営者について</p>
+      <div class="profile-panel">
+        <div class="profile-badge" aria-hidden="true">旅</div>
+        <div>
+          <p class="lede">
+            小説を読むことが好きで、このサイトを作りました。ジャンルを問わず気になった作品を手に取り、
+            読み終えたあとの余韻を書き留めたり、印象に残った場面からイラストを描いたりしています。
+            普段は創作活動や翻訳の勉強もしていて、言葉を扱うことが好きな人間です。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 40 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== 関連サイト ===================== -->
+  <section class="section-alt">
+    <div class="wrap">
+      <p class="section-label">関連サイト・創作活動</p>
+      <div class="link-grid">
+
+        <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+          <div class="link-icon">✒️</div>
+          <div class="link-text">
+            <span class="link-name">カクヨム</span>
+            <span class="link-desc">オリジナル小説を掲載中</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+          <div class="link-icon">🎨</div>
+          <div class="link-text">
+            <span class="link-name">Pixiv</span>
+            <span class="link-desc">二次創作イラストを掲載</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">
+          <div class="link-icon">🏠</div>
+          <div class="link-text">
+            <span class="link-name">Azalea Creative Room</span>
+            <span class="link-desc">創作活動のメインサイト</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+      </div>
+
+      <p class="section-label" style="margin-top:40px;">SNS</p>
+      <div class="link-grid">
+
+        <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+          <div class="link-icon">🦋</div>
+          <div class="link-text">
+            <span class="link-name">Bluesky</span>
+            <span class="link-desc">近況・読書メモの共有</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+        <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+          <div class="link-icon">🎬</div>
+          <div class="link-text">
+            <span class="link-name">YouTube（リリポピ）</span>
+            <span class="link-desc">動画チャンネル</span>
+          </div>
+          <span class="link-arrow">›</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 5 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== お問い合わせフォーム ===================== -->
+  <section>
+    <div class="wrap">
+      <p class="section-label">お問い合わせ</p>
+
+      <div class="form-card">
+        <p class="form-intro">ご感想・ご質問などはこちらからどうぞ。<br>いただいたメッセージには、できる範囲でお返事します。</p>
+
+        <div data-fs-success class="form-success" style="display:none;">
+          <span class="form-success-icon">🌿</span>
+          <p>メッセージを送信しました。ありがとうございます！</p>
+        </div>
+
+        <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+        <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+
+          <div class="form-group">
+            <label class="form-label" for="name">お名前</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="紙上の旅人">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">メールアドレス <span class="required">*</span></label>
+            <input class="form-input" type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+            <span data-fs-error="email" class="field-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">メッセージ <span class="required">*</span></label>
+            <textarea class="form-textarea" id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+            <span data-fs-error="message" class="field-error"></span>
+          </div>
+
+          <button class="form-submit" type="submit" data-fs-submit-btn>
+            <span class="submit-icon">📮</span> 送信する
+          </button>
+
+        </form>
+      </div>
+
+      <a class="back-link" href="index.html">← トップページに戻る</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <span class="footer-brand">紙上の旅人 — 小説ファンサイト</span>
+      <ul class="footer-nav">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+        <li><a href="ranking.html">お気に入りランキング</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="about.html">このサイトについて</a></li>
+      </ul>
+    </div>
+    <p class="disclaimer">
+      当サイトは個人が運営する非公式のファンサイトです。作中で紹介する作品の著作権は、それぞれの著者・出版社に帰属します。
+      掲載しているイラスト・感想文は個人による非営利のファン活動として制作したものであり、原作の権利を侵害する意図はありません。
+      問題がある場合は速やかに対応いたしますのでご連絡ください。<br>
+      当サイトに掲載されている画像・文章・作品について、AI学習への利用、トレース、無断転載・二次利用を禁止します。<br>
+      Please refrain from using any images, text, or works on this website for AI training, tracing, or unauthorized reproduction.<br>
+      © 紙上の旅人. Fan-made, non-commercial.
+    </p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".hamburger");
+  const nav = document.querySelector(".nav-list");
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("is-open");
+      toggle.classList.toggle("is-open", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+});
+
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
