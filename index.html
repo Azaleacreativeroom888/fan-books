@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>紙上の旅人｜小説ファンサイト</title>
+<meta name="description" content="小説を読むことが好きな人のための個人ファンサイト。読書記録、お気に入りランキング、二次創作ギャラリーなどを掲載しています。">
+<meta name="robots" content="noai, noimageai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@500;600&display=swap" rel="stylesheet">
+<style>
+@charset "UTF-8";
+
+/* ==========================================================================
+   さいはての彼女 非公式ファンサイト — 共通スタイルシート
+   原田マハ『さいはての彼女』（角川文庫）非公式ファンサイト用
+   ========================================================================== */
+
+:root{
+  /* --- カラートークン ------------------------------------------------- */
+  --paper:      #F8F5E9;   /* 文庫の紙のような生成り */
+  --paper-alt:  #F0EAD4;   /* セクション区切り用の少し濃い生成り */
+  --ink:        #32362A;   /* 本文の墨色（やや緑がかった黒） */
+  --ink-soft:   #5E6350;   /* 補足テキスト */
+  --green-main: #A7C24C;   /* メインの黄緑：牧草・新緑・追い風 */
+  --green-deep: #57742E;   /* 濃い緑：見出し・リンク */
+  --green-line: #7FA33C;   /* 中間の緑：装飾線 */
+  --road-tan:   #D9C9A0;   /* 北海道の一本道の土色 */
+  --sky:        #93B7C4;   /* 遠くの空の水色（差し色） */
+  --mustard:    #E2AE3B;   /* 道路標識のような黄：小さなアクセント */
+  --shadow:     rgba(50, 54, 42, 0.12);
+
+  --font-display: "Shippori Mincho B1", serif;
+  --font-body:    "Zen Kaku Gothic New", sans-serif;
+  --font-hand:    "Klee One", cursive;
+
+  --max-width: 1080px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+img{ max-width: 100%; display: block; }
+
+a{ color: var(--green-deep); text-decoration: none; }
+a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+h1, h2, h3, h4{
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 700;
+  margin: 0 0 0.6em;
+  line-height: 1.5;
+}
+
+.eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-hand);
+  font-size: 0.85rem;
+  color: var(--green-deep);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.8em;
+}
+.eyebrow::before{
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--green-deep);
+  display: inline-block;
+}
+
+.wrap{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+:focus-visible{
+  outline: 2px solid var(--green-deep);
+  outline-offset: 3px;
+}
+
+/* --- ヘッダー / ナビゲーション ------------------------------------------ */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248, 245, 233, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(87, 116, 46, 0.18);
+}
+
+.site-header .wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.brand .brand-mark{
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.brand .brand-sub{
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+}
+
+.nav-list{
+  display: flex;
+  gap: 2.2em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+}
+
+.nav-list a{
+  color: var(--ink);
+  position: relative;
+  padding: 4px 2px;
+}
+.nav-list a::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 2px;
+  background: var(--green-main);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-list a:hover{ text-decoration: none; }
+.nav-list a:hover::after,
+.nav-list a[aria-current="page"]::after{ transform: scaleX(1); }
+.nav-list a[aria-current="page"]{ color: var(--green-deep); font-weight: 700; }
+
+.hamburger{
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+.hamburger span,
+.hamburger span::before,
+.hamburger span::after{
+  content: "";
+  position: absolute;
+  left: 9px;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.hamburger span{ top: 19px; }
+.hamburger span::before{ top: -7px; }
+.hamburger span::after{ top: 7px; }
+.hamburger.is-open span{ background: transparent; }
+.hamburger.is-open span::before{ transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open span::after{ transform: translateY(-7px) rotate(-45deg); }
+
+/* --- 風のライン（このサイトのシグネチャー装飾） -------------------------- */
+.wind-divider{
+  width: 100%;
+  height: 46px;
+  display: block;
+  margin: 0;
+}
+.wind-divider path{
+  fill: none;
+  stroke: var(--green-line);
+  stroke-width: 1.4;
+  stroke-dasharray: 2 10;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+
+/* --- ヒーロー ----------------------------------------------------------- */
+.hero{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #EAF1DD 0%, #DCE9C4 38%, var(--green-main) 100%);
+  padding-top: 64px;
+}
+
+.hero-sky{
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 8%, rgba(255,255,255,0.55), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 15% 15%, rgba(147,183,196,0.35), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content{
+  position: relative;
+  z-index: 2;
+  padding: 88px 24px 40px;
+  text-align: center;
+}
+
+.hero-title{
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3em;
+}
+.hero-title .furi{
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 0.9rem;
+  color: var(--green-deep);
+  letter-spacing: 0.3em;
+  margin-bottom: 0.9em;
+}
+
+.hero-tagline{
+  max-width: 34em;
+  margin: 0 auto 2.2em;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+.hero-meta{
+  display: inline-flex;
+  gap: 1.6em;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: rgba(248,245,233,0.6);
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(87,116,46,0.25);
+}
+
+/* --- 一本道アニメーション（ヒーロー下部） -------------------------------- */
+.road-scene{
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+.road-scene .field{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--green-main) 0%, #8FAE3F 100%);
+}
+.road-scene svg{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.road-line{
+  stroke: var(--paper);
+  stroke-width: 3;
+  stroke-dasharray: 18 16;
+  fill: none;
+  opacity: 0.85;
+}
+.road-rider{
+  animation: drive 7s linear infinite;
+}
+@media (prefers-reduced-motion: reduce){
+  .road-rider{ animation: none; }
+}
+@keyframes drive{
+  0%{ transform: translateX(-6%); }
+  100%{ transform: translateX(106%); }
+}
+
+/* --- セクション共通 ------------------------------------------------------ */
+section{ padding: 84px 0; }
+.section-alt{ background: var(--paper-alt); }
+
+.lede{
+  max-width: 46em;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+}
+
+.two-col{
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* --- 本のイメージ（原著カバーの再現ではなく、オリジナルの雰囲気イラスト） --- */
+.book-glyph{
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px var(--shadow);
+  border: 1px solid rgba(87,116,46,0.15);
+}
+
+/* --- 4つの物語 ----------------------------------------------------------- */
+.story-list{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.story-card{
+  background: var(--paper);
+  border: 1px solid rgba(87,116,46,0.18);
+  border-radius: 10px;
+  padding: 30px 28px;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.story-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px var(--shadow);
+}
+.story-order{
+  font-family: var(--font-hand);
+  font-size: 0.78rem;
+  color: var(--green-deep);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.6em;
+}
+.story-card h3{
+  font-size: 1.28rem;
+  margin-bottom: 0.5em;
+}
+.story-card p{
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin: 0;
+}
+.story-tag{
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--green-deep);
+  background: rgba(167,194,76,0.22);
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+/* --- キャラクターコーナー -------------------------------------------------- */
+.character-panel{
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: center;
+  background: linear-gradient(120deg, #EFE7C8 0%, var(--paper-alt) 100%);
+  border-radius: 14px;
+  padding: 44px;
+  margin-top: 40px;
+}
+.character-badge{
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #C7DB8F, var(--green-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  box-shadow: inset 0 0 0 6px rgba(255,255,255,0.25);
+}
+
+/* --- テーマ / 引用ふうリフレクション --------------------------------------- */
+.theme-quote{
+  max-width: 40em;
+  margin: 0 auto;
+  text-align: center;
+}
+.theme-quote p{
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 2.1;
+  color: var(--ink);
+}
+.theme-quote .quote-mark{
+  font-family: var(--font-hand);
+  font-size: 2.4rem;
+  color: var(--green-main);
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+/* --- サイト内リンクガイド -------------------------------------------------- */
+.guide-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 40px;
+}
+.guide-card{
+  padding: 26px 22px;
+  border-radius: 10px;
+  background: var(--paper);
+  border: 1px solid rgba(87,116,46,0.18);
+}
+.guide-card .g-icon{
+  font-family: var(--font-hand);
+  font-size: 0.75rem;
+  color: var(--green-deep);
+  letter-spacing: 0.08em;
+}
+.guide-card h4{ margin: 0.5em 0 0.4em; font-size: 1.05rem; }
+.guide-card p{ color: var(--ink-soft); font-size: 0.88rem; margin: 0 0 0.9em; }
+.guide-card a{ font-size: 0.85rem; font-weight: 700; }
+
+/* --- フッター -------------------------------------------------------------- */
+.site-footer{
+  background: var(--ink);
+  color: #DCE3CE;
+  padding: 56px 0 30px;
+}
+.site-footer .wrap{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.footer-top{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-brand{
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--paper);
+}
+.footer-nav{
+  display: flex;
+  gap: 1.6em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+}
+.footer-nav a{ color: #C7D2AE; }
+.footer-nav a:hover{ color: var(--green-main); }
+
+.disclaimer{
+  font-size: 0.78rem;
+  color: #9AA687;
+  line-height: 1.8;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 20px;
+}
+
+/* --- レスポンシブ ------------------------------------------------------------ */
+@media (max-width: 860px){
+  .two-col{ grid-template-columns: 1fr; }
+  .story-list{ grid-template-columns: 1fr; }
+  .character-panel{ grid-template-columns: 1fr; text-align: center; }
+  .character-badge{ width: 140px; margin: 0 auto; }
+  .guide-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 720px){
+  .nav-list{
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid rgba(87,116,46,0.18);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-list.is-open{ max-height: 320px; }
+  .nav-list li{ width: 100%; }
+  .nav-list a{
+    display: block;
+    padding: 16px 24px;
+    border-top: 1px solid rgba(87,116,46,0.08);
+  }
+  .nav-list a::after{ display: none; }
+  .hamburger{ display: block; }
+  section{ padding: 60px 0; }
+  .guide-grid{ grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="#57742E" stroke-width="1.4"/>
+        <path d="M6 22 C 14 14, 18 28, 26 18 S 34 12, 36 16" fill="none" stroke="#A7C24C" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span>紙上の旅人<span class="brand-sub">— 小説ファンサイト —</span></span>
+    </a>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span>
+    </button>
+    <ul class="nav-list">
+      <li><a href="index.html" aria-current="page">ホーム</a></li>
+      <li><a href="blog.html">ブログ</a></li>
+      <li><a href="ranking.html">お気に入りランキング</a></li>
+      <li><a href="gallery.html">ギャラリー</a></li>
+      <li><a href="about.html">このサイトについて</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-sky"></div>
+    <div class="hero-content wrap">
+      <p class="hero-title">
+        <span class="furi">NOVEL FAN SITE</span>
+        紙上の旅人
+      </p>
+      <p class="hero-tagline">
+        一冊のページをめくるたび、知らない風景へ連れ出される。<br>
+        好きな小説の感想やランキング、そこから生まれたイラストを綴る個人ファンサイトです。
+      </p>
+      <span class="hero-meta">
+        <span>読書記録</span>
+        <span>お気に入りランキング</span>
+        <span>二次創作イラスト</span>
+      </span>
+    </div>
+
+    <div class="road-scene" aria-hidden="true">
+      <div class="field"></div>
+      <svg viewBox="0 0 400 150" preserveAspectRatio="none">
+        <path class="road-line" d="M0 120 Q 200 90 400 120"/>
+        <g class="road-rider">
+          <circle cx="0" cy="98" r="4.5" fill="#F8F5E9"/>
+          <path d="M-14 98 q 14 -10 14 0" fill="none" stroke="#F8F5E9" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 5 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== このサイトについて ===================== -->
+  <section id="about-site">
+    <div class="wrap two-col">
+      <div>
+        <p class="eyebrow">ABOUT THIS SITE</p>
+        <h2>好きな小説について、思うぞんぶん語る場所</h2>
+        <p class="lede">
+          国内文学、海外文学、ミステリ、ファンタジー——ジャンルを問わず、心を動かされた小説について書き留めているファンサイトです。
+          読んだ本の感想や印象に残った一節、心に残ったシーンから生まれたイラストなど、
+          「小説を読む」という体験そのものを楽しむための場所として作りました。
+        </p>
+        <p class="lede">
+          読書は、椅子に座ったまま知らない土地へ旅に出るようなもの。
+          ページをめくるたびに吹く風を感じてもらえたらうれしいです。
+        </p>
+      </div>
+      <div class="book-glyph">
+        <svg viewBox="0 0 420 520" role="img" aria-label="風と一本道をイメージしたオリジナルイラスト">
+          <rect width="420" height="520" fill="#EFE7C8"/>
+          <rect width="420" height="300" y="220" fill="#A7C24C"/>
+          <path d="M0 260 Q 210 220 420 260" fill="none" stroke="#F8F5E9" stroke-width="6" stroke-dasharray="26 20" opacity="0.85"/>
+          <circle cx="330" cy="90" r="58" fill="#F3EAC6" opacity="0.9"/>
+          <path d="M40 150 C 90 110, 130 170, 180 130 S 260 90, 300 130" fill="none" stroke="#57742E" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+          <path d="M20 190 C 70 160, 100 210, 150 180" fill="none" stroke="#57742E" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+          <text x="210" y="470" text-anchor="middle" font-family="Shippori Mincho B1, serif" font-size="24" fill="#32362A">本を開けば、旅に出る</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 40 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== 好きなジャンル ===================== -->
+  <section class="section-alt" id="genres">
+    <div class="wrap">
+      <p class="eyebrow">FAVORITE SHELVES</p>
+      <h2>よく読む本棚</h2>
+      <p class="lede">特定の作品にしぼらず、いろいろなジャンルの小説を行き来しながら読んでいます。今のところ、よく手に取るのはこのあたりです。</p>
+
+      <div class="story-list">
+        <article class="story-card">
+          <span class="story-order">SHELF</span>
+          <h3>国内文学</h3>
+          <p>
+            静かな筆致で人の心の機微を描く作品が好きです。
+            派手な事件がなくても、読み終えたあとに深呼吸したくなるような小説をよく手に取ります。
+          </p>
+          <span class="story-tag">じんわり系</span>
+        </article>
+
+        <article class="story-card">
+          <span class="story-order">SHELF</span>
+          <h3>海外文学・翻訳小説</h3>
+          <p>
+            翻訳ならではの言葉のリズムや、異なる文化圏の空気を味わうのが好きで、
+            訳者あとがきまでじっくり読み込んでしまうタイプです。
+          </p>
+          <span class="story-tag">翻訳もの</span>
+        </article>
+
+        <article class="story-card">
+          <span class="story-order">SHELF</span>
+          <h3>ミステリ・サスペンス</h3>
+          <p>
+            伏線が丁寧に張られた作品にとにかく弱いです。
+            読み返したときに「ここで気づけたのか」と発見があるものほど好きになります。
+          </p>
+          <span class="story-tag">再読推奨</span>
+        </article>
+
+        <article class="story-card">
+          <span class="story-order">SHELF</span>
+          <h3>ファンタジー・SF</h3>
+          <p>
+            現実にはない世界観に浸りたいときに読みます。
+            緻密に作り込まれた設定や、独自の言葉遣いを見つけるのも楽しみのひとつです。
+          </p>
+          <span class="story-tag">異世界</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 5 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== テーマ ===================== -->
+  <section id="theme">
+    <div class="wrap theme-quote">
+      <span class="quote-mark" aria-hidden="true">〜</span>
+      <p>
+        小説は、知らない誰かの人生をひとつ、まるごと生きさせてくれる。<br>
+        読み終えたあとに残る風のような余韻を、ここに少しずつ書き留めています。
+      </p>
+      <p class="hero-meta" style="margin-top:1.6em;">このサイトを作った理由について</p>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 40 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== サイト案内 ===================== -->
+  <section class="section-alt" id="guide">
+    <div class="wrap">
+      <p class="eyebrow">SITE GUIDE</p>
+      <h2>このサイトでできること</h2>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <span class="g-icon">DIARY</span>
+          <h4>ブログ</h4>
+          <p>読んだ本の感想や、日々の読書にまつわる気づきを日記形式で綴っています。</p>
+          <a href="blog.html">ブログを読む &rarr;</a>
+        </div>
+        <div class="guide-card">
+          <span class="g-icon">RANKING</span>
+          <h4>お気に入りランキング</h4>
+          <p>これまで読んだ小説の中から、心に残った作品や一節を独自の視点でまとめました。</p>
+          <a href="ranking.html">ランキングを見る &rarr;</a>
+        </div>
+        <div class="guide-card">
+          <span class="g-icon">GALLERY</span>
+          <h4>ギャラリー</h4>
+          <p>好きな小説の一場面から生まれたファンアートや、二次創作イラストを展示しています。</p>
+          <a href="gallery.html">ギャラリーへ &rarr;</a>
+        </div>
+        <div class="guide-card">
+          <span class="g-icon">ABOUT</span>
+          <h4>このサイトについて</h4>
+          <p>運営者の自己紹介や、サイトを作った経緯について書いています。</p>
+          <a href="about.html">詳しく見る &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <span class="footer-brand">紙上の旅人 — 小説ファンサイト</span>
+      <ul class="footer-nav">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+        <li><a href="ranking.html">お気に入りランキング</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="about.html">このサイトについて</a></li>
+      </ul>
+    </div>
+    <p class="disclaimer">
+      当サイトは個人が運営する非公式のファンサイトです。作中で紹介する作品の著作権は、それぞれの著者・出版社に帰属します。
+      掲載しているイラスト・感想文は個人による非営利のファン活動として制作したものであり、原作の権利を侵害する意図はありません。
+      問題がある場合は速やかに対応いたしますのでご連絡ください。<br>
+      当サイト内のすべてのコンテンツについて、AIモデルの学習目的での使用を禁止します。<br>
+      © 紙上の旅人. Fan-made, non-commercial.
+    </p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".hamburger");
+  const nav = document.querySelector(".nav-list");
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("is-open");
+      toggle.classList.toggle("is-open", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+});
+
+</script>
+</body>
+</html>
