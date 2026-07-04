@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お気に入りランキング｜紙上の旅人</title>
+<meta name="description" content="これまで読んだ小説の中から、心に残った作品をランキング形式でまとめています。紙上の旅人 — 小説ファンサイト。">
+<meta name="robots" content="noai, noimageai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@500;600&display=swap" rel="stylesheet">
+<style>
+@charset "UTF-8";
+
+/* ==========================================================================
+   紙上の旅人｜小説ファンサイト — お気に入りランキング
+   ========================================================================== */
+
+:root{
+  --paper:      #F8F5E9;
+  --paper-alt:  #F0EAD4;
+  --ink:        #32362A;
+  --ink-soft:   #5E6350;
+  --green-main: #A7C24C;
+  --green-deep: #57742E;
+  --green-line: #7FA33C;
+  --road-tan:   #D9C9A0;
+  --sky:        #93B7C4;
+  --mustard:    #E2AE3B;
+  --shadow:     rgba(50, 54, 42, 0.12);
+
+  --font-display: "Shippori Mincho B1", serif;
+  --font-body:    "Zen Kaku Gothic New", sans-serif;
+  --font-hand:    "Klee One", cursive;
+
+  --max-width: 1080px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+img{ max-width: 100%; display: block; }
+a{ color: var(--green-deep); text-decoration: none; }
+a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+h1, h2, h3, h4{
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 700;
+  margin: 0 0 0.6em;
+  line-height: 1.5;
+}
+
+.eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-hand);
+  font-size: 0.85rem;
+  color: var(--green-deep);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.8em;
+}
+
+.wrap{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+:focus-visible{
+  outline: 2px solid var(--green-deep);
+  outline-offset: 3px;
+}
+
+/* --- ヘッダー / ナビゲーション ------------------------------------------ */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248, 245, 233, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(87, 116, 46, 0.18);
+}
+.site-header .wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.brand .brand-mark{ width: 30px; height: 30px; flex-shrink: 0; }
+.brand .brand-sub{
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+}
+.nav-list{
+  display: flex;
+  gap: 2.2em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+}
+.nav-list a{ color: var(--ink); position: relative; padding: 4px 2px; }
+.nav-list a::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 2px;
+  background: var(--green-main);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-list a:hover{ text-decoration: none; }
+.nav-list a:hover::after,
+.nav-list a[aria-current="page"]::after{ transform: scaleX(1); }
+.nav-list a[aria-current="page"]{ color: var(--green-deep); font-weight: 700; }
+
+.hamburger{
+  display: none;
+  width: 40px; height: 40px;
+  border: none; background: transparent;
+  cursor: pointer; position: relative;
+}
+.hamburger span, .hamburger span::before, .hamburger span::after{
+  content: ""; position: absolute; left: 9px;
+  width: 22px; height: 2px; background: var(--ink);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.hamburger span{ top: 19px; }
+.hamburger span::before{ top: -7px; }
+.hamburger span::after{ top: 7px; }
+.hamburger.is-open span{ background: transparent; }
+.hamburger.is-open span::before{ transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open span::after{ transform: translateY(-7px) rotate(-45deg); }
+
+/* --- 風のライン ---------------------------------------------------------- */
+.wind-divider{ width: 100%; height: 46px; display: block; margin: 0; }
+.wind-divider path{
+  fill: none; stroke: var(--green-line); stroke-width: 1.4;
+  stroke-dasharray: 2 10; stroke-linecap: round; opacity: 0.6;
+}
+
+/* --- ページヒーロー ------------------------------------------------------- */
+.page-hero{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #EAF1DD 0%, #DCE9C4 55%, var(--green-main) 100%);
+  padding: 96px 24px 64px;
+  text-align: center;
+}
+.page-hero .hero-sky{
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 8%, rgba(255,255,255,0.55), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 15% 15%, rgba(147,183,196,0.35), transparent 70%);
+  pointer-events: none;
+}
+.page-hero-content{ position: relative; z-index: 2; }
+.page-hero .eyebrow{ justify-content: center; }
+.page-hero h1{ font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 0.04em; }
+.page-hero p{ max-width: 34em; margin: 0 auto; color: var(--ink-soft); font-size: 1rem; }
+
+.page-note{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1.6em;
+  background: rgba(248,245,233,0.7);
+  border: 1px solid rgba(87,116,46,0.3);
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+
+/* --- セクション共通 ------------------------------------------------------- */
+section{ padding: 72px 0; }
+.section-alt{ background: var(--paper-alt); }
+
+.section-head{
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.section-head .dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green-main);
+  flex-shrink: 0;
+}
+
+/* --- トップ10カード ------------------------------------------------------- */
+.top10{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.top-card{
+  background: var(--paper);
+  border: 1px solid rgba(87,116,46,0.18);
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.top-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px var(--shadow);
+}
+.rank-badge{
+  min-width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.badge-1{ background: var(--green-deep); color: #fff; font-size: 1.1rem; }
+.badge-2{ background: var(--green-line); color: #fff; }
+.badge-3{ background: var(--green-main); color: var(--ink); }
+.badge-rest{ background: var(--paper-alt); color: var(--green-deep); border: 1px solid rgba(87,116,46,0.3); }
+
+.top-card-body{ flex: 1; }
+.genre-tag{
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--green-deep);
+  background: rgba(167,194,76,0.22);
+  border-radius: 999px;
+  padding: 2px 12px;
+  margin-bottom: 8px;
+}
+.top-card-title{
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.top-card-text{ font-size: 0.92rem; color: var(--ink-soft); line-height: 1.85; }
+.top-card-text:empty::after{ content: "—"; color: #B9BFA9; }
+
+/* --- 全レビュー一覧 -------------------------------------------------------- */
+.review-list{ display: flex; flex-direction: column; gap: 10px; }
+.review-item{
+  background: var(--paper);
+  border: 1px solid rgba(87,116,46,0.14);
+  border-radius: 10px;
+  padding: 16px 20px;
+  transition: background 0.15s ease;
+}
+.review-item:hover{ background: #FCFAF1; }
+.review-item-title{
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.review-item-text{ font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8; }
+.review-item-text:empty::after{ content: "—"; color: #B9BFA9; }
+
+/* --- 省略ノート ------------------------------------------------------------ */
+.omission-note{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(167,194,76,0.14);
+  border: 1px dashed rgba(87,116,46,0.4);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin: 6px 0 4px;
+  font-size: 0.82rem;
+  color: var(--green-deep);
+}
+.omission-note::before{ content: "🍃"; font-size: 0.95rem; }
+
+/* --- 戻るリンク ------------------------------------------------------------ */
+.back-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 40px;
+  color: var(--green-deep);
+  border: 1px solid rgba(87,116,46,0.35);
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  transition: background 0.15s ease;
+}
+.back-link:hover{ background: rgba(167,194,76,0.16); text-decoration: none; }
+
+/* --- フッター -------------------------------------------------------------- */
+.site-footer{ background: var(--ink); color: #DCE3CE; padding: 56px 0 30px; }
+.site-footer .wrap{ display: flex; flex-direction: column; gap: 24px; }
+.footer-top{ display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-brand{ font-family: var(--font-display); font-size: 1.1rem; color: var(--paper); }
+.footer-nav{ display: flex; gap: 1.6em; list-style: none; padding: 0; margin: 0; flex-wrap: wrap; font-size: 0.88rem; }
+.footer-nav a{ color: #C7D2AE; }
+.footer-nav a:hover{ color: var(--green-main); }
+.disclaimer{
+  font-size: 0.78rem; color: #9AA687; line-height: 1.8;
+  border-top: 1px solid rgba(255,255,255,0.12); padding-top: 20px;
+}
+
+/* --- レスポンシブ ------------------------------------------------------------ */
+@media (max-width: 720px){
+  .nav-list{
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--paper);
+    flex-direction: column; gap: 0;
+    border-bottom: 1px solid rgba(87,116,46,0.18);
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-list.is-open{ max-height: 320px; }
+  .nav-list li{ width: 100%; }
+  .nav-list a{ display: block; padding: 16px 24px; border-top: 1px solid rgba(87,116,46,0.08); }
+  .nav-list a::after{ display: none; }
+  .hamburger{ display: block; }
+  section{ padding: 52px 0; }
+  .page-hero{ padding: 76px 20px 48px; }
+  .top-card{ flex-direction: column; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="#57742E" stroke-width="1.4"/>
+        <path d="M6 22 C 14 14, 18 28, 26 18 S 34 12, 36 16" fill="none" stroke="#A7C24C" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span>紙上の旅人<span class="brand-sub">— 小説ファンサイト —</span></span>
+    </a>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span>
+    </button>
+    <ul class="nav-list">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="blog.html">ブログ</a></li>
+      <li><a href="ranking.html" aria-current="page">お気に入りランキング</a></li>
+      <li><a href="gallery.html">ギャラリー</a></li>
+      <li><a href="about.html">このサイトについて</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== PAGE HERO ===================== -->
+  <section class="page-hero">
+    <div class="hero-sky"></div>
+    <div class="page-hero-content wrap">
+      <p class="eyebrow">RANKING</p>
+      <h1>お気に入りランキング</h1>
+      <p>これまで読んだ小説の中から、心に残った作品を独自の視点でまとめています。備忘録なので感想にはネタバレを含みます。</p>
+      <span class="page-note">🌿 順位は随時入れ替わります・随時更新</span>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 5 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== TOP 10 ===================== -->
+  <section>
+    <div class="wrap">
+      <p class="section-head"><span class="dot"></span>現在のトップ10</p>
+
+      <div class="top10">
+
+        <div class="top-card">
+          <div class="rank-badge badge-1">1</div>
+          <div class="top-card-body">
+            <span class="genre-tag">ジャンルタグ</span>
+            <div class="top-card-title">（サンプル）作品タイトルが入ります</div>
+            <div class="top-card-text">ここに感想を書きます。読み終えた直後の気持ちをそのまま残しておくのがおすすめです。</div>
+          </div>
+        </div>
+
+        <div class="top-card">
+          <div class="rank-badge badge-2">2</div>
+          <div class="top-card-body">
+            <span class="genre-tag">ジャンルタグ</span>
+            <div class="top-card-title">（サンプル）作品タイトルが入ります</div>
+            <div class="top-card-text">短くても長くてもOK。好きなポイントを一言でまとめるのも良さそうです。</div>
+          </div>
+        </div>
+
+        <div class="top-card">
+          <div class="rank-badge badge-3">3</div>
+          <div class="top-card-body">
+            <span class="genre-tag">ジャンルタグ</span>
+            <div class="top-card-title">（サンプル）作品タイトルが入ります</div>
+            <div class="top-card-text">感想が思いつかないときは空欄のままでも表示できます。</div>
+          </div>
+        </div>
+
+        <div class="top-card">
+          <div class="rank-badge badge-rest">4</div>
+          <div class="top-card-body">
+            <span class="genre-tag">ジャンルタグ</span>
+            <div class="top-card-title">（サンプル）作品タイトルが入ります</div>
+            <div class="top-card-text"></div>
+          </div>
+        </div>
+
+        <div class="top-card">
+          <div class="rank-badge badge-rest">5</div>
+          <div class="top-card-body">
+            <span class="genre-tag">ジャンルタグ</span>
+            <div class="top-card-title">（サンプル）作品タイトルが入ります</div>
+            <div class="top-card-text"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <svg class="wind-divider" viewBox="0 0 1080 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 Q 270 40 540 23 T 1080 23"/>
+  </svg>
+
+  <!-- ===================== 全レビュー一覧 ===================== -->
+  <section class="section-alt">
+    <div class="wrap">
+      <p class="section-head"><span class="dot"></span>全レビュー一覧</p>
+
+      <div class="review-list">
+
+        <div class="review-item">
+          <div class="review-item-title">（サンプル）作品タイトル <span class="genre-tag">ジャンルタグ</span></div>
+          <div class="review-item-text">短い感想メモをここに入れます。</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-item-title">（サンプル）作品タイトル <span class="genre-tag">ジャンルタグ</span></div>
+          <div class="review-item-text"></div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-item-title">（サンプル）作品タイトル <span class="genre-tag">ジャンルタグ</span></div>
+          <div class="review-item-text">感想は空欄でも、タイトルだけの記録として残せます。</div>
+        </div>
+
+        <div class="omission-note">この先も同じ形式でタイトルを追加していく想定です</div>
+
+        <div class="review-item">
+          <div class="review-item-title">（サンプル）作品タイトル <span class="genre-tag">ジャンルタグ</span></div>
+          <div class="review-item-text"></div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-item-title">（サンプル）作品タイトル <span class="genre-tag">ジャンルタグ</span></div>
+          <div class="review-item-text"></div>
+        </div>
+
+      </div>
+
+      <a class="back-link" href="index.html">← トップページに戻る</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <span class="footer-brand">紙上の旅人 — 小説ファンサイト</span>
+      <ul class="footer-nav">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+        <li><a href="ranking.html">お気に入りランキング</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="about.html">このサイトについて</a></li>
+      </ul>
+    </div>
+    <p class="disclaimer">
+      当サイトは個人が運営する非公式のファンサイトです。作中で紹介する作品の著作権は、それぞれの著者・出版社に帰属します。
+      掲載しているイラスト・感想文は個人による非営利のファン活動として制作したものであり、原作の権利を侵害する意図はありません。
+      問題がある場合は速やかに対応いたしますのでご連絡ください。<br>
+      当サイト内のすべてのコンテンツについて、AIモデルの学習目的での使用を禁止します。<br>
+      © 紙上の旅人. Fan-made, non-commercial.
+    </p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".hamburger");
+  const nav = document.querySelector(".nav-list");
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("is-open");
+      toggle.classList.toggle("is-open", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+});
+</script>
+</body>
+</html>
